@@ -4,7 +4,22 @@ import TaskCard from "./TaskCard";
 
 const TaskList = () => {
   let filter = "all";
-  const filteredTasks = [];
+  const filteredTasks = [
+    {
+      _id: "1",
+      title: "đang làm dự án todo list",
+      status: "active",
+      completedAt: null,
+      createdAt: new Date(),
+    },
+    {
+      _id: "2",
+      title: "đã thi",
+      status: "complete",
+      completedAt: new Date(),
+      createdAt: new Date(),
+    },
+  ];
 
   if (!filteredTasks || filteredTasks.length === 0) {
     return <TaskEmptyState filter={filter} />;
