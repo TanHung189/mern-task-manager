@@ -2,7 +2,8 @@ import React from "react";
 import { Card } from "./ui/card";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
-import { CheckCircle2 } from "lucide-react";
+import { Calendar, CheckCircle2 } from "lucide-react";
+import { Input } from "./ui/input";
 
 const TaskCard = ({ task, index }) => {
   let isEditing = false;
@@ -32,6 +33,32 @@ const TaskCard = ({ task, index }) => {
             <circle className="size-5" />
           )}
         </Button>
+        <div className="flex-1 min-w-0">
+          {isEditing ? (
+            <Input
+              placeholder="cần phải làm gì"
+              className="flex-1 h-12 text-base border-border/50 focus:border-primary/50 focus:ring-primary/20"
+              type="text"
+            />
+          ) : (
+            <p
+              className={cn(
+                "text-base transition-all duration-200",
+                task.status === "complete"
+                  ? "line-through text-muted-foreground"
+                  : "text-foreground"
+              )}
+            >
+              {task.title}
+            </p>
+          )}
+        </div>
+        <div className="flex items-center gap-2 mt-1">
+          <Calendar className="size-3 text-muted-foreground" />
+          <span className="text-xs text-muted-foreground">
+            {new Date(task.createAt).toLocaleString()}
+          </span>
+        </div>
       </div>
     </Card>
   );
