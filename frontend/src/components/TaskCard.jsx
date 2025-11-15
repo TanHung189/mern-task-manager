@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "./ui/card";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
-import { Calendar, CheckCircle2 } from "lucide-react";
+import { Calendar, CheckCircle2, SquarePen, Trash2 } from "lucide-react";
 import { Input } from "./ui/input";
 
 const TaskCard = ({ task, index }) => {
@@ -52,12 +52,40 @@ const TaskCard = ({ task, index }) => {
               {task.title}
             </p>
           )}
+          <div className="flex items-center gap-2 mt-1">
+            <Calendar className="size-3 text-muted-foreground" />
+            <span className="text-xs text-muted-foreground">
+              {new Date(task.createdAt).toLocaleString()}
+            </span>
+            {task.completedAt && (
+              <>
+                <span className="text-xs text-muted-foreground "> - </span>
+                <Calendar className="size-3 text-muted-foreground" />
+                <span className="text-xs text-muted-foreground ">
+                  {new Date(task.completedAt).toLocaleString()}
+                </span>
+              </>
+            )}
+          </div>
         </div>
-        <div className="flex items-center gap-2 mt-1">
-          <Calendar className="size-3 text-muted-foreground" />
-          <span className="text-xs text-muted-foreground">
-            {new Date(task.createAt).toLocaleString()}
-          </span>
+
+        {/* nút chỉnh và xóa */}
+        <div className="hidden gap-2 group-hover:inline-flex animate-slide-up">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="flex-shrink-0 transition-colors size-8 text-muted-foreground hover:text-info"
+          >
+            <SquarePen className="size-4 " />
+          </Button>
+
+          <Button
+            variant="ghost"
+            size="icon"
+            className="flex-shrink-0 transition-colors size-8 text-muted-foreground hover:text-destructive"
+          >
+            <Trash2 className="size-4" />
+          </Button>
         </div>
       </div>
     </Card>
