@@ -5,9 +5,22 @@ import { Header } from "@/components/Header";
 import StatsAndFilters from "@/components/StatsAndFilters";
 import TaskList from "@/components/TaskList";
 import TaskListPagination from "@/components/TaskListPagination";
-import React from "react";
+import React, { useState } from "react";
+import { toast } from "sonner";
 
 const HomePage = () => {
+  const [taskBuffer, settaskBuffer] = useState([]);
+  const fetchTasks = async () => {
+    try {
+      const res = await fetch("http://localhost:5001/api/tasks");
+      const data = await res.json();
+      settaskBuffer(data.tasks);
+      console.log(data.tasks);
+    } catch (error) {
+      console.error("Lỗi xảy ra khi truy xuất task:", error);
+      toast.error("Lỗi xảy ra khi truy xuất task:");
+    }
+  };
   return (
     <div className="min-h-screen w-full relative">
       {/* Dark Horizon Glow */}

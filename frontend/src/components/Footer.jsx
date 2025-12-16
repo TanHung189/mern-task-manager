@@ -10,12 +10,14 @@ const Footer = ({ completedTaskCount = 0, activeTaskCount = 0 }) => {
             {completedTaskCount > 0 && (
               <>
                 Thật tiệt, bạn đã hoàn thành {completedTaskCount} việc
-                
-                {activeTaskCount > 0 && `,`còn $(  activeTaskCount ) việc nữa thôi. Cố lên!}
+                {activeTaskCount > 0 &&
+                  `, còn ${activeTaskCount} việc nữa thôi. Cố lên!`}
               </>
             )}
 
-            {completedTaskCount === 0 && activeTaskCount > 0}
+            {completedTaskCount === 0 && activeTaskCount > 0 && (
+              <>Hãy Bắt đầu làm {activeTaskCount} nhiệm vụ nào</>
+            )}
           </p>
         </div>
       )}
